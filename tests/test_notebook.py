@@ -4,7 +4,7 @@ import pytest
 import inspect
 
 
-from notebook.model.notebook import Notebook as notebook_module
+from notebook.model import notebook as notebook_module
 
 module_members = [item[0] for item in inspect.getmembers(notebook_module)]
 class_note_defined = "Note" in module_members
