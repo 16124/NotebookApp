@@ -64,21 +64,26 @@ class Console:
         print("\n=== SHOW NOTES COUNT ===\n")
         tags_count = self.notebook.tags_note_count()
         for tag, count in tags_count.items():
-            print(f"- Tag '{tag} has {count} notes")
+            print(f"- Tag '{tag}' has {count} notes")
 
     def delete_note(self):
         print("\n=== DELETE NOTE ===\n")
         self.list_notes()
         note_code: int = int(input("Enter note code: "))
-        del self.notebook.notes[note_code]
-        print(f"Note with code {note_code} has been deleted")
+        try: 
+            del self.notebook.notes[note_code]
+            print(f"Note with code {note_code} has been deleted")
+        except:
+            print("The Code does not exist")
 
     def list_important_notes(self):
         print("\n=== IMPORTANT NOTES ===")
         important_notes = self.notebook.important_notes()
         if len(important_notes) > 0:
             for note in important_notes:
-                print(note)
+                # print(f"code: {note}")
+                print(self.notebook.notes[note])
+                print(f"importance: {self.notebook.notes[note].importance}")
                 print()
         else:
             print("No items to show")
@@ -86,11 +91,14 @@ class Console:
     def add_tags_to_note(self):
         print("\n=== ADD TAGS TO NOTE ===\n")
         self.list_notes()
+        # try: 
         note_code: int = int(input("Enter note code: "))
         tags: str = input("Enter tags separated by comma: ")
         for tag in tags.split(","):
             self.notebook.notes[note_code].add_tag(tag)
         print(f"Tags were added successfully to note with code {note_code}")
+        # except:
+        #     print("The Code does not exist")
 
     def list_notes(self):
         print("\n=== NOTES LIST ===")
