@@ -11,11 +11,11 @@ class Note:
     title: str
     text: str
     importance: str
-    creation_time: datetime = field(default_factory=datetime.now)
+    creation_date: datetime = field(default_factory=datetime.now)
     tags: List[str] = field(default_factory=list)
 
     def __str__(self):
-        return f"Code: {self.code}\nCreation date: {self.creation_time}\n{self.title}: {self.text}"
+        return f"Code: {self.code}\nCreation date: {self.creation_date}\n{self.title}: {self.text}"
 
     def add_tag(self, tag: str):
         if tag not in self.tags:
